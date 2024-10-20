@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Click Statistics</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+
+    <script>
+        function fetchStatistics() {
+            fetch('http://localhost:3000/statistics')
+                .then(response => response.json())
+                .then(data => {
+                    // Extract labels (image names) and values (click counts)
+                    const labels = data.map(image => image.image_name);
+                    const clickCounts = data.map(image => image.clicks);
+    
+                    // Set up the chart
+                    const ctx = document.getElementById('clickChart').getContext('2d');
+                    const clickChart = new Chart(ctx, {
+                        type: 'pie',  // You can change this to 'pie' for a pie chart
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Clicks',
+                                data: clickCounts,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(0, 20, 235, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                // This plugin will display the value of each segment
+                                datalabels: {
+                                    anchor: 'end',
+                                    align: 'top',
+                                    formatter: (value, context) => {
+                                        // Show both name and click count
+                                        const name = context.chart.data.labels[context.dataIndex];
+                                        return name + ': ' + value + ' clicks';
+                                    },
+                                    color: 'white',  // Label text color
+                                    font: {
+                                        weight: 'bold',
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        plugins: [ChartDataLabels]  // Enable the Data Labels plugin
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        window.onload = fetchStatistics;
+    </script>
+    
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Image Click Statistics</h1>
+        </div>
+        <div id="stats">
+            <!-- Stats will be populated here -->
+            <canvas id="clickChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</body>
+</html>

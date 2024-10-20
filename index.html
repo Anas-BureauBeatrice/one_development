@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspired by You</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+
+
+function trackClick(event, imageName) {
+    // Prevent the default behavior temporarily
+    event.preventDefault();
+
+    console.log('Tracking click for:', imageName);
+
+    // Send the click tracking data
+    fetch('http://localhost:3000/click', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image_name: imageName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // After tracking, navigate to the appropriate page
+        if (imageName === 'forest') {
+            window.location.href = 'nature.html';
+        } else if (imageName === 'city') {
+            window.location.href = 'city.html';
+        } else if (imageName === 'beach') {
+            window.location.href = 'beach.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // In case of an error, navigate to the appropriate page anyway
+        if (imageName === 'forest') {
+            window.location.href = 'nature.html';
+        } else if (imageName === 'city') {
+            window.location.href = 'city.html';
+        } else if (imageName === 'beach') {
+            window.location.href = 'beach.html';
+        }
+    });
+}
+
+
+
+window.onload = updateStatistics;  // Call this function on page load to initialize the chart
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="Assets/1ST SCREEN/LOGO AND LOCKUP@2x.png" alt="ONE Development Logo" class="logo">
+        </div>
+        <div class="image-gallery">
+            <a href="nature.html" onclick="trackClick(event, 'forest')">
+                <img src="/Assets/1ST SCREEN/PICTURE 1_1@2x.png" alt="Forest Image">
+            </a>
+            <a href="city.html" onclick="trackClick(event, 'city')">
+                <img src="Assets/1ST SCREEN/PICTURE 2_1@2x.png" alt="City Image">
+            </a>
+            <a href="beach.html" onclick="trackClick(event, 'beach')">
+                <img src="Assets/1ST SCREEN/PICTURE 3_1@2x.png" alt="Beach Image">
+            </a>
+        </div>
+        
+        
+        
+        <div class="subtitle">Which picture inspires you?</div>
+        <div class="subtitle-arabic">أي صورة تلهمكم؟</div>
+    </div>
+</body>
+</html>
