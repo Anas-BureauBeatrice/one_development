@@ -18,7 +18,7 @@ function trackClick(event, imageName) {
     console.log('Tracking click for:', imageName);
 
     // Send the click tracking data
-    fetch('http://localhost:3000/click', {
+    fetch('https://one-development.onrender.com/click', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
