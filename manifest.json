@@ -1,9 +1,9 @@
 {
     "short_name": "One Development",
-    "name": "Inspired by You - Full Screen",
+    "name": "Inspired by You",
     "icons": [
       {
-        "src": "Assets/1ST SCREEN/LOGO AND LOCKUP@2x.png",
+        "src": "Assets/1ST SCREEN/APP-LOGO.png",
         "sizes": "192x192",
         "type": "image/png"
       }
