@@ -1,10 +1,33 @@
 /* General Reset */
 @font-face {
     font-family: 'HTQaysSansPro';
-    src: url('fonts/HTQaysSansPro-Regular.ttf') format('truetype'); /* Adjust the path if needed */
+    src: url('fonts/HTQaysSansPro-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'SharpSansDispNo2';
+    src: url('fonts/SharpSansDispNo2-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.subtitle {
+    font-family: 'SharpSansDispNo2', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.subtitle-arabic {
+    font-family: 'HTQaysSansPro', sans-serif;
+    margin-top: 10px;
+    font-size: 2.2rem; /* Slightly smaller than the English subtitle for better balance */
+    font-weight: 700;
+    color: white;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -79,17 +102,17 @@ h2 {
     transition: transform 0.3s ease-in-out;
 }
 
-.subtitle, .subtitle-arabic {
+/*.subtitle, .subtitle-arabic {
     font-family: 'HTQaysSansPro', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
     color: white;
-}
+/*}
 
-.subtitle-arabic {
+/*.subtitle-arabic {
     margin-top: 10px;
     font-size: 2.2rem; /* Slightly smaller than the English subtitle for better balance */
-}
+/*}
 /* Full-page image styling */
 /* Full-page image styling */
 .full-image-container {
