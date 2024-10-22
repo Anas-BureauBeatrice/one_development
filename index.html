@@ -8,39 +8,43 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Preload or Prefetch Pages -->
+    <link rel="prefetch" href="nature.html">
+    <link rel="prefetch" href="city.html">
+    <link rel="prefetch" href="beach.html">
     <script>
-        async function trackClick(event, imageName) {
+        function trackClick(event, imageName) {
             // Prevent the default behavior temporarily
             event.preventDefault();
-    
+            
             console.log('Tracking click for:', imageName);
     
-            try {
-                const response = await fetch('https://one-development.onrender.com/click', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ image_name: imageName })
-                });
+            // Start tracking click and navigation simultaneously
+            const pages = {
+                'nature': 'nature.html',
+                'city': 'city.html',
+                'beach': 'beach.html'
+            };
+            
+            // Navigate immediately to improve responsiveness
+            window.location.href = pages[imageName];
     
-                const data = await response.json();
+            // Send the fetch request asynchronously
+            fetch('https://one-development.onrender.com/click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image_name: imageName })
+            }).then(response => response.json())
+            .then(data => {
                 console.log(data);
-    
-            } catch (error) {
+            })
+            .catch(error => {
                 console.error('Error:', error);
-            } finally {
-                // Navigate to the appropriate page regardless of success or failure
-                const pages = {
-                    'nature': 'nature.html',
-                    'city': 'city.html',
-                    'beach': 'beach.html'
-                };
-                window.location.href = pages[imageName];
-            }
+            });
         }
     </script>
-    
 </head>
 <body>
     <div class="container">
@@ -58,8 +62,6 @@
                 <img src="Assets/1ST SCREEN/PICTURE 3_1@2x.png" alt="Beach Image" loading="lazy">
             </a>
         </div>
-        
-        
         
         <div class="subtitle">Which picture inspires you?</div>
         <div class="subtitle-arabic">أي صورة تلهمكم؟</div>
