@@ -5,12 +5,6 @@ const app = express();
 const PORT = 3000;
 
 // Setup CORS
-const corsOptions = {
-    origin: ['https://unrivaled-dolphin-af7137.netlify.app'], // Ensure Netlify domain is explicitly allowed
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-};
-app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 
