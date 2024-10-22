@@ -9,48 +9,38 @@
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script>
-
-
-function trackClick(event, imageName) {
-    // Prevent the default behavior temporarily
-    event.preventDefault();
-
-    console.log('Tracking click for:', imageName);
-
-    // Send the click tracking data
-    fetch('https://one-development.onrender.com/click', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ image_name: imageName })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        // After tracking, navigate to the appropriate page
-        if (imageName === 'nature') {
-            window.location.href = 'nature.html';
-        } else if (imageName === 'city') {
-            window.location.href = 'city.html';
-        } else if (imageName === 'beach') {
-            window.location.href = 'beach.html';
+        async function trackClick(event, imageName) {
+            // Prevent the default behavior temporarily
+            event.preventDefault();
+    
+            console.log('Tracking click for:', imageName);
+    
+            try {
+                const response = await fetch('https://one-development.onrender.com/click', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image_name: imageName })
+                });
+    
+                const data = await response.json();
+                console.log(data);
+    
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                // Navigate to the appropriate page regardless of success or failure
+                const pages = {
+                    'nature': 'nature.html',
+                    'city': 'city.html',
+                    'beach': 'beach.html'
+                };
+                window.location.href = pages[imageName];
+            }
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // In case of an error, navigate to the appropriate page anyway
-        if (imageName === 'nature') {
-            window.location.href = 'nature.html';
-        } else if (imageName === 'city') {
-            window.location.href = 'city.html';
-        } else if (imageName === 'beach') {
-            window.location.href = 'beach.html';
-        }
-    });
-}
-
     </script>
+    
 </head>
 <body>
     <div class="container">
