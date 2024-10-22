@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 // Setup CORS
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Database connection using environment variable
