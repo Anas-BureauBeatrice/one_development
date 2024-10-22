@@ -1,16 +1,11 @@
 const express = require('express');
-const { Pool } = require('pg');
+const { Pool } = require('pg');  // Use pg instead of mysql
 const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-// Configure CORS to allow only your Netlify frontend
-app.use(cors({
-    origin: 'https://unrivaled-dolphin-af7137.netlify.app/index.html',  // Replace with your Netlify URL
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-}));
-
+// Setup CORS
+app.use(cors());
 app.use(express.json());
 
 // Database connection using environment variable
