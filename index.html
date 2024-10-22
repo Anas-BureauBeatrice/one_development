@@ -35,23 +35,29 @@
         function trackClick(event, imageName) {
             // Prevent the default behavior temporarily
             event.preventDefault();
-    
+
             console.log('Tracking click for:', imageName);
-    
-            // Send POST request asynchronously without blocking navigation
-            fetch('https://one-development.onrender.com/click', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image_name: imageName })
-            }).then(response => {
-                return response.json();
-            }).then(data => {
-                console.log(data);
-            }).catch(error => {
-                console.error('Error:', error);
-            });
+
+            // Prepare data to be sent
+            const data = JSON.stringify({ image_name: imageName });
+            const url = 'https://one-development.onrender.com/click';
+
+            // Send data using sendBeacon for non-blocking POST request
+            if (navigator.sendBeacon) {
+                const blob = new Blob([data], { type: 'application/json' });
+                navigator.sendBeacon(url, blob);
+            } else {
+                // Fallback for browsers that do not support sendBeacon
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: data
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            }
 
             // Navigate immediately
             const pages = {
