@@ -23,7 +23,13 @@
             });
         };
 
-        document.addEventListener('DOMContentLoaded', preloadPages);
+        document.addEventListener('DOMContentLoaded', () => {
+            preloadPages();
+
+            // Add fade-in effect when the page loads
+            const container = document.querySelector('.container');
+            container.classList.add('fade-in');
+        });
 
         // Function to track clicks and navigate instantly
         function trackClick(event, imageName) {
@@ -66,7 +72,12 @@
     <style>
         /* Smooth transitions for page elements */
         .container {
+            opacity: 0; /* Start with 0 opacity for fade-in */
             transition: opacity 0.5s;
+        }
+
+        .fade-in {
+            opacity: 1;
         }
 
         .fade-out {
