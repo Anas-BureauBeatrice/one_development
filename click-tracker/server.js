@@ -6,7 +6,7 @@ const PORT = 3000;
 
 // Configure CORS to allow only your Netlify frontend
 app.use(cors({
-    origin: 'https://unrivaled-dolphin-af7137.netlify.app/',  // Replace with your Netlify URL
+    origin: 'https://unrivaled-dolphin-af7137.netlify.app/index.html',  // Replace with your Netlify URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 }));
