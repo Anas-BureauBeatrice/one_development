@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspired by You</title>
+    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
+    
     <!-- Preload CSS and images for faster loading -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="Assets/1ST SCREEN/PICTURE 1_1@2x.png" as="image">
     <link rel="preload" href="Assets/1ST SCREEN/PICTURE 2_1@2x.png" as="image">
     <link rel="preload" href="Assets/1ST SCREEN/PICTURE 3_1@2x.png" as="image">
-
+    
     <script>
         // Preload the pages to make navigation faster
         const preloadPages = () => {
@@ -47,38 +48,17 @@
             } catch (error) {
                 console.error('Error:', error);
             } finally {
-                // Use dynamic content loading instead of full page navigation
-                navigateToPage(imageName);
-            }
-        }
-
-        // Function to dynamically load page content for a SPA-like experience
-        async function navigateToPage(pageKey) {
-            const pages = {
-                'nature': 'nature.html',
-                'city': 'city.html',
-                'beach': 'beach.html'
-            };
-
-            const pageUrl = pages[pageKey];
-
-            // Load the content dynamically without full page reload
-            try {
-                const response = await fetch(pageUrl);
-                const html = await response.text();
-
-                // Replace the body content
-                document.body.innerHTML = html;
-
-                // Scroll to top of the page (optional)
-                window.scrollTo(0, 0);
-
-            } catch (error) {
-                console.error('Error loading page:', error);
+                // Navigate to the appropriate page regardless of success or failure
+                const pages = {
+                    'nature': 'nature.html',
+                    'city': 'city.html',
+                    'beach': 'beach.html'
+                };
+                window.location.href = pages[imageName];
             }
         }
     </script>
-
+    
     <style>
         /* Smooth transitions for page elements */
         .container {
