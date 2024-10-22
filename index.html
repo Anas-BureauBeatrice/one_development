@@ -18,13 +18,14 @@ function trackClick(event, imageName) {
     console.log('Tracking click for:', imageName);
 
     // Send the click tracking data
-    fetch('https://one-development.onrender.com/click', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ image_name: imageName })
-    })
+    fetch('/api/click', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ image_name: imageName })
+})
+
     .then(response => response.json())
     .then(data => {
         console.log(data);
